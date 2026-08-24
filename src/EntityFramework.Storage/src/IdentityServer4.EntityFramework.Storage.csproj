@@ -1,16 +1,20 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <PackageId>IdentityServer4.EntityFramework.Storage</PackageId>
-    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <PackageId>ZinfoFramework.IdentityServer4.EntityFramework.Storage</PackageId>
+    <Version>10.0.0</Version>
+    <TargetFramework>net10.0</TargetFramework>
     
-    <Description>EntityFramework persistence layer for IdentityServer4</Description>
-    <Authors>Brock Allen;Dominick Baier;Scott Brady</Authors>
-    <PackageTags>OAuth2;OAuth 2.0;OpenID Connect;Security;Identity;IdentityServer;EntityFramework</PackageTags>
+    <Description>ZinfoFramework independent continuation of the IdentityServer4 Entity Framework storage layer.</Description>
+    <Authors>Luiz Antonio</Authors>
+    <PackageTags>ZinfoFramework;OAuth2;OAuth 2.0;OpenID Connect;Security;Identity;IdentityServer;EntityFramework</PackageTags>
     <PackageIcon>icon.jpg</PackageIcon>
-    <PackageProjectUrl>https://github.com/IdentityServer/IdentityServer4</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/Luizinfo/IdentityServer4</PackageProjectUrl>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/Luizinfo/IdentityServer4.git</RepositoryUrl>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
-    <PackageReleaseNotes>https://github.com/IdentityServer/IdentityServer4/releases</PackageReleaseNotes>
+    <PackageReleaseNotes>ZinfoFramework 10.0.0 is an independently maintained .NET 10 continuation.</PackageReleaseNotes>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
@@ -29,10 +33,12 @@
 
   <ItemGroup>
     <None Include="../../../icon.jpg" Pack="true" Visible="false" PackagePath="" />
+    <None Include="../../../README.md" Pack="true" PackagePath="" />
+    <None Include="../../../ATTRIBUTION.md" Pack="true" PackagePath="" />
   </ItemGroup>
   
   <ItemGroup>
-    <PackageReference Include="IdentityServer4.Storage" />
+    <PackageReference Include="ZinfoFramework.IdentityServer4.Storage" />
     
     <PackageReference Include="AutoMapper" />
 

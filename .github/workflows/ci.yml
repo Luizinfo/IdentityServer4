@@ -22,7 +22,11 @@ jobs:
     runs-on: ${{ matrix.runs-on }}
     steps:
     - uses: actions/checkout@af513c7a016048ae468971c52ed77d9562c7c819
+    - uses: actions/setup-dotnet@v5
+      with:
+        dotnet-version: '10.0.x'
     - run: dotnet --info
+    - run: dotnet tool restore
     
     - if: contains(matrix.runs-on, 'macOS') || contains(matrix.runs-on, 'ubuntu')
       run: ./build.sh
@@ -31,6 +35,4 @@ jobs:
     - if: (matrix.runs-on == 'windows-latest') && (github.ref == 'refs/heads/main' || contains(github.ref, 'refs/tags/'))
       env:
         SignClientSecret: ${{ secrets.SIGNCLIENT }}
-      run: |
-        ./build.ps1 sign
-        dotnet nuget push .\nuget\*.nupkg -s https://www.myget.org/F/identity/api/v2/package -k ${{ secrets.MYGET }}
+      run: ./build.ps1 sign

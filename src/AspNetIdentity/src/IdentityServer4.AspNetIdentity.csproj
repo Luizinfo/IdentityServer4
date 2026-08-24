@@ -1,17 +1,21 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <PackageId>IdentityServer4.AspNetIdentity</PackageId>
-    <TargetFrameworks>netcoreapp3.1</TargetFrameworks>
+    <PackageId>ZinfoFramework.IdentityServer4.AspNetIdentity</PackageId>
+    <Version>10.0.0</Version>
+    <TargetFramework>net10.0</TargetFramework>
     
-    <Description>ASP.NET Core Identity Integration for IdentityServer4</Description>
-    <Authors>Brock Allen;Dominick Baier</Authors>
+    <Description>ZinfoFramework independent continuation of ASP.NET Core Identity integration for IdentityServer4.</Description>
+    <Authors>Luiz Antonio</Authors>
     <AssemblyName>IdentityServer4.AspNetIdentity</AssemblyName>
-    <PackageTags>OAuth2;OAuth 2.0;OpenID Connect;Security;Identity;IdentityServer;ASP.NET Identity</PackageTags>
+    <PackageTags>ZinfoFramework;OAuth2;OAuth 2.0;OpenID Connect;Security;Identity;IdentityServer;ASP.NET Identity</PackageTags>
     <PackageIcon>icon.jpg</PackageIcon>
-    <PackageProjectUrl>https://github.com/IdentityServer/IdentityServer4</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/Luizinfo/IdentityServer4</PackageProjectUrl>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/Luizinfo/IdentityServer4.git</RepositoryUrl>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
-    <PackageReleaseNotes>https://github.com/IdentityServer/IdentityServer4/releases</PackageReleaseNotes>
+    <PackageReleaseNotes>ZinfoFramework 10.0.0 is an independently maintained .NET 10 continuation.</PackageReleaseNotes>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
 
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
@@ -32,6 +36,8 @@
 
   <ItemGroup>
     <None Include="../../../icon.jpg" Pack="true" Visible="false" PackagePath="" />
+    <None Include="../../../README.md" Pack="true" PackagePath="" />
+    <None Include="../../../ATTRIBUTION.md" Pack="true" PackagePath="" />
   </ItemGroup>
 
   <ItemGroup>
@@ -39,7 +45,7 @@
   </ItemGroup>
     
   <ItemGroup>
-    <PackageReference Include="IdentityServer4" />
+    <PackageReference Include="ZinfoFramework.IdentityServer4" />
     
     <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" />
   </ItemGroup>

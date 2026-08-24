@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Net;
 using System.Net.Http;
 using System.Security.Cryptography;
@@ -33,10 +33,10 @@ namespace ConsoleEphemeralMtlsClient
             var disco = await client.GetDiscoveryDocumentAsync(Constants.AuthorityMtls);
             if (disco.IsError) throw new Exception(disco.Error);
 
-            var endpoint = disco
-                .TryGetValue(OidcConstants.Discovery.MtlsEndpointAliases)
-                .Value<string>(OidcConstants.Discovery.TokenEndpoint)
-                .ToString();
+            var endpoint = disco.Json.Value
+                .GetProperty(OidcConstants.Discovery.MtlsEndpointAliases)
+                .GetProperty(OidcConstants.Discovery.TokenEndpoint)
+                .GetString();
             
             var response = await client.RequestClientCredentialsTokenAsync(new ClientCredentialsTokenRequest
             {

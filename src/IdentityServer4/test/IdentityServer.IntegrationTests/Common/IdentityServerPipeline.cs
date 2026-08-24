@@ -20,6 +20,7 @@ using IdentityServer4.Services;
 using IdentityServer4.Test;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.TestHost;
@@ -108,6 +109,8 @@ namespace IdentityServer.IntegrationTests.Common
         public void ConfigureServices(IServiceCollection services)
         {
             OnPreConfigureServices(services);
+
+            services.AddDataProtection().UseEphemeralDataProtectionProvider();
 
             services.AddAuthentication(opts =>
             {
@@ -332,7 +335,7 @@ namespace IdentityServer.IntegrationTests.Common
                 responseMode: responseMode,
                 codeChallenge: codeChallenge,
                 codeChallengeMethod: codeChallengeMethod,
-                extra: extra);
+                extra: extra == null ? null : Parameters.FromObject(extra));
             return url;
         }
 

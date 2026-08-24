@@ -1,66 +1,49 @@
-# Important update
-This organization is not maintained anymore besides critical security bugfixes (if feasible). This organization will be archived when .NET Core 3.1 end of support is reached (3rd Dec 2022). All new development is happening in the new [Duende Software](https://github.com/duendesoftware) organization. 
+# ZinfoFramework IdentityServer4
 
-The new [Duende IdentityServer](https://duendesoftware.com/products/identityserver) comes with a commercial license but is [free](https://blog.duendesoftware.com/posts/20220111_fair_trade/) for dev/testing/personal projects and companies or individuals making less than 1M USD gross annnual revenue. Please [get in touch with us](https://duendesoftware.com/contact) if you have any question.
+> Continuação independente mantida por **Luiz Antonio** em [Luizinfo](https://github.com/Luizinfo/). Este fork não é afiliado nem endossado pelos mantenedores originais e não declara certificação OpenID Connect própria.
 
-## About IdentityServer4
-[<img align="right" width="100px" src="https://dotnetfoundation.org/img/logo_big.svg" />](https://dotnetfoundation.org/projects?searchquery=IdentityServer&type=project)
+IdentityServer4 é um framework OpenID Connect e OAuth 2.0 para ASP.NET Core. Esta distribuição atualiza os componentes ativos para .NET 10, preservando os namespaces e nomes de assemblies históricos.
 
-IdentityServer is a free, open source [OpenID Connect](http://openid.net/connect/) and [OAuth 2.0](https://tools.ietf.org/html/rfc6749) framework for ASP.NET Core.
-Founded and maintained by [Dominick Baier](https://twitter.com/leastprivilege) and [Brock Allen](https://twitter.com/brocklallen), IdentityServer4 incorporates all the protocol implementations and extensibility points needed to integrate token-based authentication, single-sign-on and API access control in your applications.
-IdentityServer4 is officially [certified](https://openid.net/certification/) by the [OpenID Foundation](https://openid.net) and thus spec-compliant and interoperable.
-It is part of the [.NET Foundation](https://www.dotnetfoundation.org/), and operates under their [code of conduct](https://www.dotnetfoundation.org/code-of-conduct). It is licensed under [Apache 2](https://opensource.org/licenses/Apache-2.0) (an OSI approved license).
+## Instalação
 
-For project documentation, please visit [readthedocs](https://identityserver4.readthedocs.io).
+Os pacotes `10.0.0` requerem `net10.0`:
 
-## Branch structure
-Active development happens on the main branch. This always contains the latest version. Each (pre-) release is tagged with the corresponding version. The [aspnetcore1](https://github.com/IdentityServer/IdentityServer4/tree/aspnetcore1) and [aspnetcore2](https://github.com/IdentityServer/IdentityServer4/tree/aspnetcore2) branches contain the latest versions of the older ASP.NET Core based versions.
+```shell
+dotnet add package ZinfoFramework.IdentityServer4 --version 10.0.0
+```
 
-## How to build
+Adicione também o pacote de persistência ou integração necessário ao seu projeto.
 
-* [Install](https://www.microsoft.com/net/download/core#/current) the latest .NET Core 3.1 SDK
-* Install Git
-* Clone this repo
-* Run `build.ps1` or `build.sh` in the root of the cloned repo
+## Migração dos IDs
 
-## Documentation
-For project documentation, please visit [readthedocs](https://identityserver4.readthedocs.io).
+| ID histórico | Novo ID 10.0.0 |
+| --- | --- |
+| `IdentityServer4` | `ZinfoFramework.IdentityServer4` |
+| `IdentityServer4.Storage` | `ZinfoFramework.IdentityServer4.Storage` |
+| `IdentityServer4.EntityFramework.Storage` | `ZinfoFramework.IdentityServer4.EntityFramework.Storage` |
+| `IdentityServer4.EntityFramework` | `ZinfoFramework.IdentityServer4.EntityFramework` |
+| `IdentityServer4.AspNetIdentity` | `ZinfoFramework.IdentityServer4.AspNetIdentity` |
 
-See [here](http://docs.identityserver.io/en/aspnetcore1/) for the 1.x docs, and [here](http://docs.identityserver.io/en/aspnetcore2/) for the 2.x docs.
+Troque apenas a `PackageReference` e o TFM para `net10.0`. Namespaces e assemblies permanecem `IdentityServer4.*`. Revise as breaking changes das dependências .NET/ASP.NET Core/EF Core 10 e valide seus fluxos OAuth/OIDC e migrações existentes antes de implantar. O schema persistido não foi redesenhado por esta atualização.
 
-## Bug reports and feature requests
-Please use the [issue tracker](https://github.com/IdentityServer/IdentityServer4/issues) for that. We only support the latest version for free. For older versions, you can get a commercial support agreement with us.
+## Build
 
-## Commercial and Community Support
-If you need help with implementing IdentityServer4 or your security architecture in general, there are both free and commercial support options.
-See [here](https://identityserver4.readthedocs.io/en/latest/intro/support.html) for more details.
+Instale o SDK .NET 10 e execute `build.ps1` no Windows ou `build.sh` em Linux/macOS. Dependências `ZinfoFramework.IdentityModel*` são obtidas do NuGet.org; dependências públicas continuam vindo do mesmo feed.
 
-## Sponsorship
-If you are a fan of the project or a company that relies on IdentityServer, you might want to consider sponsoring.
-This will help us devote more time to answering questions and doing feature development. If you are interested please head to our [Patreon](https://www.patreon.com/identityserver) page which has further details.
+## Projeto e comunidade
 
-### Platinum Sponsors
-[<img src="https://user-images.githubusercontent.com/1454075/62819413-39550c00-bb55-11e9-8f2f-a268c3552c71.png" width="200">](https://udelt.no)
+- Código e issues: [Luizinfo/IdentityServer4](https://github.com/Luizinfo/IdentityServer4)
+- Suporte: [SUPPORT.md](SUPPORT.md)
+- Segurança: [SECURITY.MD](SECURITY.MD)
+- Contribuição: [CONTRIBUTING.md](CONTRIBUTING.md)
+- Alterações: [CHANGELOG.md](CHANGELOG.md)
+- Atribuição e histórico: [ATTRIBUTION.md](ATTRIBUTION.md)
+- Licença: [Apache-2.0](LICENSE)
 
-[<img src="https://user-images.githubusercontent.com/1454075/66454740-fb973580-ea68-11e9-9993-6c1014881528.png" width="200">](https://github.com/dotnet-at-microsoft)
+## Histórico upstream
 
-### Corporate Sponsors
-[Ritter Insurance Marketing](https://www.ritterim.com)  
-[ExtraNetUserManager](https://www.extranetusermanager.com/)  
-[Knab](https://www.knab.nl/)
+O IdentityServer4 original foi fundado e mantido por Dominick Baier e Brock Allen, com contribuições da comunidade e participação histórica da .NET Foundation. Certificações e documentação do projeto original pertencem ao contexto histórico upstream e não certificam este fork. Consulte a [atribuição](ATTRIBUTION.md) para os links históricos preservados.
 
-You can see a list of our current sponsors [here](https://github.com/IdentityServer/IdentityServer4/blob/main/SPONSORS.md) - and for companies we have some nice advertisement options as well.
+## Agradecimentos
 
-## Acknowledgements
-IdentityServer4 is built using the following great open source projects and free services:
-
-* [ASP.NET Core](https://github.com/dotnet/aspnetcore)
-* [Bullseye](https://github.com/adamralph/bullseye)
-* [SimpleExec](https://github.com/adamralph/simple-exec)
-* [MinVer](https://github.com/adamralph/minver)
-* [Json.Net](http://www.newtonsoft.com/json)
-* [XUnit](https://xunit.github.io/)
-* [Fluent Assertions](http://www.fluentassertions.com/)
-* [GitReleaseManager](https://github.com/GitTools/GitReleaseManager)
-
-..and last but not least a big thanks to all our [contributors](https://github.com/IdentityServer/IdentityServer4/graphs/contributors)!
+Crédito aos autores e a todos os [contribuidores do projeto original](https://github.com/IdentityServer/IdentityServer4/graphs/contributors), além dos projetos ASP.NET Core, Entity Framework Core, IdentityModel, Bullseye, SimpleExec, MinVer, Newtonsoft.Json, xUnit e Fluent Assertions.

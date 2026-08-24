@@ -1,7 +1,6 @@
-﻿using Clients;
+using Clients;
 using IdentityModel.Client;
 using IdentityModel.OidcClient;
-using Microsoft.IdentityModel.Logging;
 using Serilog;
 using System;
 using System.Diagnostics;
@@ -16,8 +15,6 @@ namespace WindowsConsoleSystemBrowser
     {
         static async Task Main(string[] args)
         {
-            IdentityModelEventSource.ShowPII = true;
-
             if (args.Any())
             {
                 await ProcessCallback(args[0]);

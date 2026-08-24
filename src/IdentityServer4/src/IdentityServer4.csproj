@@ -1,16 +1,20 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   
   <PropertyGroup>
-    <PackageId>IdentityServer4</PackageId>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-    <Description>OpenID Connect and OAuth 2.0 Framework for ASP.NET Core</Description>
-    <Authors>Brock Allen;Dominick Baier</Authors>
+    <PackageId>ZinfoFramework.IdentityServer4</PackageId>
+    <Version>10.0.0</Version>
+    <TargetFramework>net10.0</TargetFramework>
+    <Description>ZinfoFramework independent continuation of the IdentityServer4 OpenID Connect and OAuth 2.0 framework for ASP.NET Core.</Description>
+    <Authors>Luiz Antonio</Authors>
     <AssemblyName>IdentityServer4</AssemblyName>
-    <PackageTags>OAuth2;OAuth 2.0;OpenID Connect;Security;Identity;IdentityServer</PackageTags>
+    <PackageTags>ZinfoFramework;OAuth2;OAuth 2.0;OpenID Connect;Security;Identity;IdentityServer</PackageTags>
     <PackageIcon>icon.jpg</PackageIcon>
-    <PackageProjectUrl>https://github.com/IdentityServer/IdentityServer4</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/Luizinfo/IdentityServer4</PackageProjectUrl>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/Luizinfo/IdentityServer4.git</RepositoryUrl>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
-    <PackageReleaseNotes>https://github.com/IdentityServer/IdentityServer4/releases</PackageReleaseNotes>
+    <PackageReleaseNotes>ZinfoFramework 10.0.0 is an independently maintained .NET 10 continuation. See https://github.com/Luizinfo/IdentityServer4/releases.</PackageReleaseNotes>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
 
     <!-- Declare that the Repository URL can be published to NuSpec -->
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
@@ -33,6 +37,8 @@
   
   <ItemGroup>
     <None Include="../../../icon.jpg" Pack="true" Visible="false" PackagePath="" />
+    <None Include="../../../README.md" Pack="true" PackagePath="" />
+    <None Include="../../../ATTRIBUTION.md" Pack="true" PackagePath="" />
   </ItemGroup>
 
   <ItemGroup>
@@ -40,8 +46,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="IdentityServer4.Storage" />
-    <PackageReference Include="IdentityModel" />
+    <PackageReference Include="ZinfoFramework.IdentityServer4.Storage" />
+    <PackageReference Include="ZinfoFramework.IdentityModel" />
 
     <PackageReference Include="Newtonsoft.Json" />
     <PackageReference Include="Microsoft.IdentityModel.Protocols.OpenIdConnect" />

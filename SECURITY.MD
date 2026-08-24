@@ -1,7 +1,5 @@
-# Reporting Security Issues
+# Relato de vulnerabilidades
 
-If you discover a security issue in IdentityServer, please report it by sending an email to contact@identityserver.io
+Não divulgue vulnerabilidades em issues públicas. Use o recurso **Security advisories / Report a vulnerability** do [repositório Luizinfo/IdentityServer4](https://github.com/Luizinfo/IdentityServer4/security/advisories/new). Se o recurso não estiver disponível, abra uma issue sem detalhes sensíveis solicitando um canal privado. Não envie segredos ou dados reais.
 
-This will allow us to assess the risk, and make a fix available before we add a bug report to the GitHub repository.
-
-Thanks!
+As instruções e contatos históricos do upstream não são canais operacionais desta continuação.
