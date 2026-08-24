@@ -39,6 +39,7 @@
   <ItemGroup>
     <None Include="../../../icon.jpg" Pack="true" Visible="false" PackagePath="" />
     <None Include="../../../README.md" Pack="true" PackagePath="" />
+    <None Include="../../../LICENSE" Pack="true" PackagePath="" />
     <None Include="../../../ATTRIBUTION.md" Pack="true" PackagePath="" />
   </ItemGroup>
 
