@@ -6,6 +6,7 @@
     <TargetFramework>net10.0</TargetFramework>
     <Description>ZinfoFramework independent continuation of the IdentityServer4 OpenID Connect and OAuth 2.0 framework for ASP.NET Core.</Description>
     <Authors>Luiz Antonio</Authors>
+    <Copyright>Copyright (c) 2026 Luiz Antonio and IdentityServer4 contributors</Copyright>
     <AssemblyName>IdentityServer4</AssemblyName>
     <PackageTags>ZinfoFramework;OAuth2;OAuth 2.0;OpenID Connect;Security;Identity;IdentityServer</PackageTags>
     <PackageIcon>icon.jpg</PackageIcon>

@@ -7,6 +7,7 @@
     
     <Description>ZinfoFramework independent continuation of ASP.NET Core Identity integration for IdentityServer4.</Description>
     <Authors>Luiz Antonio</Authors>
+    <Copyright>Copyright (c) 2026 Luiz Antonio and IdentityServer4 contributors</Copyright>
     <AssemblyName>IdentityServer4.AspNetIdentity</AssemblyName>
     <PackageTags>ZinfoFramework;OAuth2;OAuth 2.0;OpenID Connect;Security;Identity;IdentityServer;ASP.NET Identity</PackageTags>
     <PackageIcon>icon.jpg</PackageIcon>

@@ -7,6 +7,7 @@
     
     <Description>ZinfoFramework independent continuation of the IdentityServer4 Entity Framework storage layer.</Description>
     <Authors>Luiz Antonio</Authors>
+    <Copyright>Copyright (c) 2026 Luiz Antonio and IdentityServer4 contributors</Copyright>
     <PackageTags>ZinfoFramework;OAuth2;OAuth 2.0;OpenID Connect;Security;Identity;IdentityServer;EntityFramework</PackageTags>
     <PackageIcon>icon.jpg</PackageIcon>
     <PackageProjectUrl>https://github.com/Luizinfo/IdentityServer4</PackageProjectUrl>

@@ -7,6 +7,7 @@
     <Version>10.0.0</Version>
     <Description>ZinfoFramework independent continuation of the IdentityServer4 storage interfaces and models.</Description>
     <Authors>Luiz Antonio</Authors>
+    <Copyright>Copyright (c) 2026 Luiz Antonio and IdentityServer4 contributors</Copyright>
 
     <PackageTags>ZinfoFramework;OAuth2;OAuth 2.0;OpenID Connect;Security;Identity;IdentityServer</PackageTags>
     <PackageIcon>icon.jpg</PackageIcon>
