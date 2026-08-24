@@ -81,7 +81,7 @@ As tasks 5.1 a 5.4 registram a validação concluída para os PackageIds histór
 
 - [x] 8.1 Executar builds e todas as suítes unitárias e de integração do IdentityServer4 com somente o SDK .NET 10.
 - [x] 8.2 Compilar quickstarts e exemplos em escopo nas plataformas declaradas, incluindo o cliente Windows no job Windows.
-- [ ] 8.3 Após autorização explícita para registrar a revisão de release, empacotar e inspecionar os cinco nupkgs `ZinfoFramework.IdentityServer4*` `10.0.0`, confirmando PackageId, Authors, Copyright, URLs, repository commit/Source Link acessível, versão, TFM, dependências, LICENSE, atribuição e README.
+- [x] 8.3 Após autorização explícita para registrar a revisão de release, empacotar e inspecionar os cinco nupkgs `ZinfoFramework.IdentityServer4*` `10.0.0`, confirmando PackageId, Authors, Copyright, URLs, repository commit/Source Link acessível, versão, TFM, dependências, LICENSE, atribuição e README.
 - [ ] 8.4 Executar a CI com cache limpo contra o novo feed, comprovar a origem dos pacotes internos e confirmar que o secret permanece mascarado e ausente dos logs.
 - [ ] 8.5 Reconfirmar no NuGet.org a disponibilidade dos cinco PackageIds e solicitar confirmação explícita do usuário para publicar exatamente os cinco nupkgs IdentityServer4 validados.
 - [ ] 8.6 Publicar exatamente os cinco artefatos aprovados e confirmar sua disponibilidade no NuGet.org antes da auditoria final.
