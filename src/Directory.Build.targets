@@ -3,10 +3,14 @@
   <PropertyGroup>
     <FrameworkVersion>10.0.0</FrameworkVersion>
     <ExtensionsVersion>10.0.0</ExtensionsVersion>
-    <EntityFrameworkVersion>10.0.0</EntityFrameworkVersion>
+    <EntityFrameworkVersion>9.0.9</EntityFrameworkVersion>
+    <EntityFrameworkStorageVersion>11.0.0</EntityFrameworkStorageVersion>
+    <EntityFrameworkPackageVersion>11.0.0</EntityFrameworkPackageVersion>
     
     <IdentityServerVersion>10.0.0</IdentityServerVersion>
     <MinVerVersionOverride>10.0.0</MinVerVersionOverride>
+    <MinVerVersionOverride Condition="'$(MSBuildProjectName)' == 'IdentityServer4.EntityFramework.Storage'">11.0.0</MinVerVersionOverride>
+    <MinVerVersionOverride Condition="'$(MSBuildProjectName)' == 'IdentityServer4.EntityFramework'">11.0.0</MinVerVersionOverride>
   </PropertyGroup>
 
   <ItemGroup>
@@ -28,8 +32,8 @@
     <PackageReference Update="ZinfoFramework.IdentityServer4" Version="$(IdentityServerVersion)" />
     <PackageReference Update="ZinfoFramework.IdentityServer4.AspNetIdentity" Version="$(IdentityServerVersion)" />
     <PackageReference Update="ZinfoFramework.IdentityServer4.Storage" Version="$(IdentityServerVersion)" />
-    <PackageReference Update="ZinfoFramework.IdentityServer4.EntityFramework.Storage" Version="$(IdentityServerVersion)" />
-    <PackageReference Update="ZinfoFramework.IdentityServer4.EntityFramework" Version="$(IdentityServerVersion)" />
+    <PackageReference Update="ZinfoFramework.IdentityServer4.EntityFramework.Storage" Version="$(EntityFrameworkStorageVersion)" />
+    <PackageReference Update="ZinfoFramework.IdentityServer4.EntityFramework" Version="$(EntityFrameworkPackageVersion)" />
 
     <!--microsoft extensions -->
     <PackageReference Update="Microsoft.Extensions.Caching.Memory" Version="$(ExtensionsVersion)" />
@@ -43,7 +47,6 @@
     <PackageReference Update="Newtonsoft.Json" Version="13.0.4" />
     <PackageReference Update="Microsoft.IdentityModel.Protocols.OpenIdConnect" Version="8.15.0" />
     <PackageReference Update="System.IdentityModel.Tokens.Jwt" Version="8.15.0" />
-    <PackageReference Update="AutoMapper" Version="16.2.0" />
     <PackageReference Update="SQLitePCLRaw.lib.e_sqlite3" Version="3.53.3" />
     
     <!--microsoft asp.net core -->

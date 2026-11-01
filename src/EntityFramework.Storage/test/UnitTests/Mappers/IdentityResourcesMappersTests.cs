@@ -11,9 +11,9 @@ namespace IdentityServer4.EntityFramework.UnitTests.Mappers
     public class IdentityResourcesMappersTests
     {
         [Fact]
-        public void IdentityResourceAutomapperConfigurationIsValid()
+        public void NullEntity_ReturnsNull()
         {
-            IdentityResourceMappers.Mapper.ConfigurationProvider.AssertConfigurationIsValid();
+            Assert.Null(((Entities.IdentityResource)null).ToModel());
         }
 
         [Fact]

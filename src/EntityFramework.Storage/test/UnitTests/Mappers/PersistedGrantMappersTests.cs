@@ -12,9 +12,9 @@ namespace IdentityServer4.EntityFramework.UnitTests.Mappers
     public class PersistedGrantMappersTests
     {
         [Fact]
-        public void PersistedGrantAutomapperConfigurationIsValid()
+        public void NullEntity_ReturnsNull()
         {
-            PersistedGrantMappers.Mapper.ConfigurationProvider.AssertConfigurationIsValid();
+            Assert.Null(((Entities.PersistedGrant)null).ToModel());
         }
 
         [Fact]

@@ -14,6 +14,16 @@ dotnet add package ZinfoFramework.IdentityServer4 --version 10.0.0
 
 Adicione também o pacote de persistência ou integração necessário ao seu projeto.
 
+## EntityFramework 11.0.0: mapeamento explícito
+
+`ZinfoFramework.IdentityServer4.EntityFramework` e `ZinfoFramework.IdentityServer4.EntityFramework.Storage` passam para `11.0.0`, com mapeamentos explícitos em C# e sem dependência do AutoMapper. Os demais pacotes desta distribuição permanecem em `10.0.0`. Ambos continuam requerendo .NET 10 e EF Core 9.0.9 ou superior.
+
+As extensões `ToModel()`, `ToEntity()` e `PersistedGrant.UpdateEntity()` mantêm suas assinaturas e namespaces. Não há alteração do schema ou necessidade de nova migration por esta substituição.
+
+**Quebra de API:** os tipos públicos `ClientMapperProfile`, `ApiResourceMapperProfile`, `IdentityResourceMapperProfile`, `ScopeMapperProfile` e `PersistedGrantMapperProfile` foram removidos. Consumidores que os registravam em configurações próprias devem usar as extensões de conversão ou implementar seus próprios mapeamentos. As conversões não lançam mais wrappers `AutoMapperMappingException`; entradas inválidas continuam falhando por exceções nativas. Remova capturas específicas do AutoMapper nesse caminho.
+
+Atualize conjuntamente os dois pacotes EntityFramework para `11.0.0` quando ambos forem referenciados diretamente. Outras dependências de AutoMapper pertencentes à aplicação consumidora devem ser avaliadas separadamente.
+
 ## Migração dos IDs
 
 | ID histórico | Novo ID 10.0.0 |

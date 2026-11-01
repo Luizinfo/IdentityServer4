@@ -13,9 +13,9 @@ namespace IdentityServer4.EntityFramework.UnitTests.Mappers
     public class ScopesMappersTests
     {
         [Fact]
-        public void ScopeAutomapperConfigurationIsValid()
+        public void NullEntity_ReturnsNull()
         {
-            ScopeMappers.Mapper.ConfigurationProvider.AssertConfigurationIsValid();
+            Assert.Null(((Entities.ApiScope)null).ToModel());
         }
 
         [Fact]

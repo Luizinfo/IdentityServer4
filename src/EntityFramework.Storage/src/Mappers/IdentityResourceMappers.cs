@@ -2,7 +2,6 @@
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
 
-using AutoMapper;
 using IdentityServer4.EntityFramework.Entities;
 
 namespace IdentityServer4.EntityFramework.Mappers
@@ -12,14 +11,6 @@ namespace IdentityServer4.EntityFramework.Mappers
     /// </summary>
     public static class IdentityResourceMappers
     {
-        static IdentityResourceMappers()
-        {
-            Mapper = new MapperConfiguration(cfg => cfg.AddProfile<IdentityResourceMapperProfile>(), Microsoft.Extensions.Logging.Abstractions.NullLoggerFactory.Instance)
-                .CreateMapper();
-        }
-
-        internal static IMapper Mapper { get; }
-
         /// <summary>
         /// Maps an entity to a model.
         /// </summary>
@@ -27,7 +18,18 @@ namespace IdentityServer4.EntityFramework.Mappers
         /// <returns></returns>
         public static Models.IdentityResource ToModel(this IdentityResource entity)
         {
-            return entity == null ? null : Mapper.Map<Models.IdentityResource>(entity);
+            return entity == null ? null : new Models.IdentityResource
+            {
+                Enabled = entity.Enabled,
+                Name = entity.Name,
+                DisplayName = entity.DisplayName,
+                Description = entity.Description,
+                Required = entity.Required,
+                Emphasize = entity.Emphasize,
+                ShowInDiscoveryDocument = entity.ShowInDiscoveryDocument,
+                UserClaims = MappingCollections.ToList(entity.UserClaims, x => x?.Type),
+                Properties = MappingCollections.ToDictionary(entity.Properties)
+            };
         }
 
         /// <summary>
@@ -37,7 +39,18 @@ namespace IdentityServer4.EntityFramework.Mappers
         /// <returns></returns>
         public static IdentityResource ToEntity(this Models.IdentityResource model)
         {
-            return model == null ? null : Mapper.Map<IdentityResource>(model);
+            return model == null ? null : new IdentityResource
+            {
+                Enabled = model.Enabled,
+                Name = model.Name,
+                DisplayName = model.DisplayName,
+                Description = model.Description,
+                Required = model.Required,
+                Emphasize = model.Emphasize,
+                ShowInDiscoveryDocument = model.ShowInDiscoveryDocument,
+                UserClaims = MappingCollections.ToList(model.UserClaims, x => x == null ? null : new IdentityResourceClaim { Type = x }),
+                Properties = MappingCollections.ToList(model.Properties, x => new IdentityResourceProperty { Key = x.Key, Value = x.Value })
+            };
         }
     }
 }

@@ -2,7 +2,6 @@
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
 
-using AutoMapper;
 using IdentityServer4.EntityFramework.Entities;
 
 namespace IdentityServer4.EntityFramework.Mappers
@@ -12,14 +11,6 @@ namespace IdentityServer4.EntityFramework.Mappers
     /// </summary>
     public static class ApiResourceMappers
     {
-        static ApiResourceMappers()
-        {
-            Mapper = new MapperConfiguration(cfg => cfg.AddProfile<ApiResourceMapperProfile>(), Microsoft.Extensions.Logging.Abstractions.NullLoggerFactory.Instance)
-                .CreateMapper();
-        }
-
-        internal static IMapper Mapper { get; }
-
         /// <summary>
         /// Maps an entity to a model.
         /// </summary>
@@ -27,7 +18,19 @@ namespace IdentityServer4.EntityFramework.Mappers
         /// <returns></returns>
         public static Models.ApiResource ToModel(this ApiResource entity)
         {
-            return entity == null ? null : Mapper.Map<Models.ApiResource>(entity);
+            return entity == null ? null : new Models.ApiResource
+            {
+                Enabled = entity.Enabled,
+                Name = entity.Name,
+                DisplayName = entity.DisplayName,
+                Description = entity.Description,
+                ShowInDiscoveryDocument = entity.ShowInDiscoveryDocument,
+                ApiSecrets = MappingCollections.ToList(entity.Secrets, SecretMapping.ToModel),
+                Scopes = MappingCollections.ToList(entity.Scopes, x => x?.Scope),
+                UserClaims = MappingCollections.ToList(entity.UserClaims, x => x?.Type),
+                Properties = MappingCollections.ToDictionary(entity.Properties),
+                AllowedAccessTokenSigningAlgorithms = SigningAlgorithmMapping.FromText(entity.AllowedAccessTokenSigningAlgorithms)
+            };
         }
 
         /// <summary>
@@ -37,7 +40,19 @@ namespace IdentityServer4.EntityFramework.Mappers
         /// <returns></returns>
         public static ApiResource ToEntity(this Models.ApiResource model)
         {
-            return model == null ? null : Mapper.Map<ApiResource>(model);
+            return model == null ? null : new ApiResource
+            {
+                Enabled = model.Enabled,
+                Name = model.Name,
+                DisplayName = model.DisplayName,
+                Description = model.Description,
+                ShowInDiscoveryDocument = model.ShowInDiscoveryDocument,
+                Secrets = MappingCollections.ToList(model.ApiSecrets, SecretMapping.ToEntity<ApiResourceSecret>),
+                Scopes = MappingCollections.ToList(model.Scopes, x => x == null ? null : new ApiResourceScope { Scope = x }),
+                UserClaims = MappingCollections.ToList(model.UserClaims, x => x == null ? null : new ApiResourceClaim { Type = x }),
+                Properties = MappingCollections.ToList(model.Properties, x => new ApiResourceProperty { Key = x.Key, Value = x.Value }),
+                AllowedAccessTokenSigningAlgorithms = SigningAlgorithmMapping.ToText(model.AllowedAccessTokenSigningAlgorithms)
+            };
         }
     }
 }

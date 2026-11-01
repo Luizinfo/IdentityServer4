@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <PackageId>ZinfoFramework.IdentityServer4.EntityFramework</PackageId>
-    <Version>10.0.0</Version>
+    <Version>11.0.0</Version>
     <TargetFramework>net10.0</TargetFramework>
 
     <Description>ZinfoFramework independent continuation of the IdentityServer4 Entity Framework persistence layer.</Description>
@@ -15,7 +15,7 @@
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/Luizinfo/IdentityServer4.git</RepositoryUrl>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
-    <PackageReleaseNotes>ZinfoFramework 10.0.0 is an independently maintained .NET 10 continuation.</PackageReleaseNotes>
+    <PackageReleaseNotes>Uses EntityFramework.Storage 11.0.0 with explicit C# mappings and no AutoMapper dependency. Breaking: the five mapper profiles are removed from Storage. Retains .NET 10 and EF Core 9.0.9 support.</PackageReleaseNotes>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     

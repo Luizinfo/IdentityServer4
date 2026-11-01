@@ -14,9 +14,9 @@ namespace IdentityServer4.EntityFramework.UnitTests.Mappers
     public class ClientMappersTests
     {
         [Fact]
-        public void AutomapperConfigurationIsValid()
+        public void NullEntity_ReturnsNull()
         {
-            ClientMappers.Mapper.ConfigurationProvider.AssertConfigurationIsValid();
+            Assert.Null(((Entities.Client)null).ToModel());
         }
 
         [Fact]
