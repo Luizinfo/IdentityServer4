@@ -11,15 +11,23 @@ O sistema SHALL compilar bibliotecas, hosts, migrações, builds, testes e proje
 - **WHEN** o job Windows da CI compila os projetos dependentes de APIs Windows
 - **THEN** eles usam `net10.0-windows` e compilam sem depender do .NET Framework
 
-### Requirement: Todos os pacotes usam versão 10.0.0 e net10.0
-Os 11 pacotes coordenados SHALL ser produzidos na versão exata `10.0.0` e SHALL conter somente assets `net10.0`.
+### Requirement: Pacotes coordenados usam as versões da matriz e net10.0
+Os 11 pacotes coordenados SHALL conter somente assets `net10.0`. Os seis pacotes IdentityModel já publicados e os três pacotes IdentityServer4 não EF SHALL usar a versão exata `10.0.0`; `ZinfoFramework.IdentityServer4.EntityFramework.Storage` e `ZinfoFramework.IdentityServer4.EntityFramework` SHALL usar a versão exata `10.0.1` na primeira publicação da família IdentityServer4.
 
-#### Scenario: Inspeção dos pacotes publicados
-- **WHEN** os 11 nupkgs `ZinfoFramework.IdentityModel*` e `ZinfoFramework.IdentityServer4*` definidos na matriz do change são inspecionados
-- **THEN** cada pacote possui versão `10.0.0`, contém assets `net10.0` e não contém pastas de outro TFM
+#### Scenario: Inspeção do conjunto coordenado
+- **WHEN** os seis nupkgs IdentityModel publicados e os cinco nupkgs IdentityServer4 preparados para publicação são inspecionados conforme a matriz do change
+- **THEN** os dois pacotes EntityFramework possuem versão `10.0.1`, os outros nove possuem versão `10.0.0` e nenhum pacote contém assets de outro TFM além de `net10.0`
 
 ### Requirement: Migrações existentes permanecem compatíveis
-A atualização para EF Core 10 SHALL preservar as migrações e o schema existentes, sem gerar uma migração de alteração apenas por causa da atualização de framework.
+Os componentes EntityFramework do IdentityServer4 SHALL usar dependências Microsoft.EntityFrameworkCore `9.0.9` no build e declarar `Microsoft.EntityFrameworkCore.Relational` `9.0.9` no pacote Storage. A combinação com SDK e TFM .NET 10 SHALL preservar as migrações e o schema existentes, sem gerar uma migração apenas por causa da mudança de versão de dependência.
+
+#### Scenario: Restore dos consumidores EntityFramework
+- **WHEN** um consumidor restaura `ZinfoFramework.IdentityServer4.EntityFramework` `10.0.1` a partir do staging isolado
+- **THEN** ele resolve `ZinfoFramework.IdentityServer4.EntityFramework.Storage` `10.0.1` e `Microsoft.EntityFrameworkCore.Relational` `9.0.9` sem selecionar os nupkgs EntityFramework provisórios `10.0.0`
+
+#### Scenario: Quickstart EntityFramework
+- **WHEN** o quickstart `5_EntityFramework` é restaurado com cache limpo antes da publicação do IdentityServer4
+- **THEN** ele consome os dois pacotes EntityFramework `10.0.1` do staging e os pacotes EF Core `9.0.9`, preservando os pacotes ASP.NET Core `10.0.0`
 
 #### Scenario: Validação de banco e migrações
 - **WHEN** as migrações existentes são aplicadas a um banco vazio e o modelo é comparado ao schema esperado

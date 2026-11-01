@@ -6,14 +6,15 @@ O repositório já possui `./nuget`, mas o script Unix apaga essa pasta antes do
 
 Os 11 PackageIds históricos já existem no NuGet.org sob responsabilidade dos mantenedores originais. A tentativa de publicar `IdentityModel.10.0.0.nupkg` com uma chave válida em formato chegou ao NuGet.org e recebeu `403 Forbidden`, porque uma continuação independente não pode publicar nova versão sob um ID de outro proprietário. O prefixo próprio `ZinfoFramework.` diferencia os forks mantidos por Luiz Antonio sem apagar a proveniência dos projetos Apache-2.0 originais.
 
-Em 2026-07-20, os endpoints flat-container dos 11 PackageIds `ZinfoFramework.*` retornaram `404`, indicando que nenhum deles estava publicado naquele momento. Essa consulta não reserva os IDs; a disponibilidade deverá ser repetida imediatamente antes de cada promoção.
+Em 2026-07-20, os endpoints flat-container dos 11 PackageIds `ZinfoFramework.*` retornaram `404`, indicando que nenhum deles estava publicado naquele momento. Depois, os seis pacotes IdentityModel `10.0.0` foram publicados; os cinco pacotes IdentityServer4 permanecem locais. A consulta antiga não reserva os IDs restantes; a disponibilidade das versões exatas deverá ser repetida imediatamente antes da promoção.
 
 ## Goals / Non-Goals
 
 **Goals:**
 
 - Compilar, testar e empacotar os componentes ativos dos cinco repositórios com .NET 10.
-- Produzir exatamente 11 nupkgs na versão `10.0.0`, somente com assets `net10.0` e PackageIds prefixados por `ZinfoFramework.`.
+- Completar a publicação dos 11 PackageIds `ZinfoFramework.` somente com assets `net10.0`: seis IdentityModel já publicados em `10.0.0`, três IdentityServer4 pendentes em `10.0.0` e dois EntityFramework pendentes em `10.0.1`.
+- Usar dependências EF Core `9.0.9` nos componentes EntityFramework do IdentityServer4, preservando as migrações e o schema existentes.
 - Publicar metadados NuGet que identifiquem Luiz Antonio como mantenedor atual e apontem para os repositórios `Luizinfo` correspondentes.
 - Documentar a continuação independente, a migração de PackageIds e os créditos aos autores e projetos originais.
 - Remover toda `PackageReference`, `ProjectReference`, assembly resolvida ou dependência transitiva cujo ID comece com `Duende.`.
@@ -42,7 +43,7 @@ O OpenSpec 1.4.1 não permite aplicar integralmente um workspace change: em `wor
 
 Bibliotecas, builds, testes e projetos ativos devem usar `net10.0`. Projetos dependentes de APIs Windows devem usar `net10.0-windows`. Pacotes públicos não manterão assets `netstandard2.0`, `netcoreapp*`, `net6.0`, `net8.0` ou `net9.0`.
 
-### Matriz de pacotes 10.0.0
+### Matriz de versões publicadas e pendentes
 
 | Repositório | PackageId | Versão |
 | --- | --- | --- |
@@ -54,11 +55,13 @@ Bibliotecas, builds, testes e projetos ativos devem usar `net10.0`. Projetos dep
 | OidcClient | `ZinfoFramework.IdentityModel.OidcClient.IdentityTokenValidator` | `10.0.0` |
 | IdentityServer4 | `ZinfoFramework.IdentityServer4` | `10.0.0` |
 | IdentityServer4 | `ZinfoFramework.IdentityServer4.Storage` | `10.0.0` |
-| IdentityServer4 | `ZinfoFramework.IdentityServer4.EntityFramework.Storage` | `10.0.0` |
-| IdentityServer4 | `ZinfoFramework.IdentityServer4.EntityFramework` | `10.0.0` |
+| IdentityServer4 | `ZinfoFramework.IdentityServer4.EntityFramework.Storage` | `10.0.1` |
+| IdentityServer4 | `ZinfoFramework.IdentityServer4.EntityFramework` | `10.0.1` |
 | IdentityServer4 | `ZinfoFramework.IdentityServer4.AspNetIdentity` | `10.0.0` |
 
 A versão de validação deve ser definida deterministicamente no build, sem depender de tags MinVer ausentes ou divergentes.
+
+Os nupkgs EntityFramework `10.0.0` gerados anteriormente continuam como evidência histórica de validação local. Não compõem o conjunto a publicar e seus hashes não podem ser usados para aprovar os nupkgs `10.0.1`. Os outros três pacotes IdentityServer4 permanecem em `10.0.0`; `EntityFramework` deverá depender de `EntityFramework.Storage` `10.0.1`.
 
 ### Identidade do fork e metadados NuGet
 
@@ -88,8 +91,10 @@ Os READMEs raiz e os READMEs incorporados aos nupkgs deverão conter: tabela de 
 4. Validar os seis pacotes `ZinfoFramework.IdentityModel*`, seus metadados, documentação incorporada e árvores de dependência.
 5. O usuário promove os seis pacotes aprovados para o novo feed NuGet.
 6. Atualizar e validar o IdentityServer4 e seus exemplos consumindo os pacotes publicados.
-7. Produzir e validar os cinco pacotes IdentityServer4 `10.0.0`.
-8. O usuário promove os cinco pacotes IdentityServer4 aprovados para o novo feed.
+7. Revalidar com cache limpo o IdentityServer4, seus testes, migrações e exemplos usando EF Core `9.0.9`, os três pacotes IdentityServer4 `10.0.0` e os dois pacotes EntityFramework `10.0.1` no staging local.
+8. Após registrar a revisão de release acessível no `RepositoryUrl`, produzir e validar os dois nupkgs EntityFramework `10.0.1`; auditar novamente o conjunto final de cinco pacotes IdentityServer4, suas dependências, versões e hashes.
+9. Após confirmação explícita para esse conjunto exato, o usuário promove os cinco pacotes IdentityServer4 para o novo feed.
+10. Executar a CI com cache limpo contra o feed publicado e confirmar a origem dos pacotes internos.
 
 O NuGet.org permanece disponível para dependências públicas. `packageSourceMapping` deve restringir os IDs internos ao staging durante a validação local e ao novo feed na CI. Credenciais nunca serão gravadas no repositório.
 
@@ -121,7 +126,8 @@ O runner deixará de usar as URLs do sistema Python aposentado e receberá os da
 - [Quebra binária em OAuth2Introspection] → publicar `10.0.0` e adicionar teste de compilação de consumidor.
 - [Regressão DPoP no test double] → validar assinatura, nonce, `cnf.jkt`, `ath`, `htm`, `htu`, replay e chave divergente.
 - [Conformance depende de serviço externo] → compilar deterministicamente na CI e manter execução externa como gate manual documentado.
-- [Mudanças de ASP.NET Core ou EF Core 10] → executar suítes completas e validar aplicação das migrações existentes sem gerar novo schema.
+- [Combinação de ASP.NET Core 10 com EF Core 9.0.9] → executar suítes completas, validar consumidores e aplicar as migrações existentes sem gerar novo schema.
+- [Artefatos EntityFramework 10.0.0 ainda locais] → excluí-los do conjunto de promoção e substituir suas evidências de hash e proveniência pelas dos nupkgs `10.0.1`.
 - [Confusão entre fork e projeto original] → usar prefixo próprio, aviso de continuação independente, links atuais e atribuição explícita em README e documento de notice.
 - [Perda de créditos ou violação de avisos] → preservar LICENSE, copyrights e avisos existentes; adicionar manutenção atual sem reescrever a autoria histórica.
 - [Documentação ou selo de certificação desatualizado] → auditar READMEs incorporados, badges e links; tratar certificações anteriores apenas como histórico até eventual certificação própria.
@@ -137,11 +143,11 @@ O runner deixará de usar as URLs do sistema Python aposentado e receberá os da
 4. Após nova aprovação do usuário, publicar esses seis pacotes no novo feed NuGet.
 5. Migrar IdentityServer4, exemplos e CI consumindo os novos IDs do feed.
 6. Aplicar os PackageIds `ZinfoFramework.IdentityServer4*`, metadados, documentação e atribuição no repositório IdentityServer4.
-7. Validar e empacotar os cinco pacotes IdentityServer4 `10.0.0`.
-8. Após aprovação do usuário, publicar os cinco pacotes IdentityServer4.
-9. Executar a auditoria final dos 11 nupkgs, builds, testes, metadados, documentação e árvores resolvidas.
+7. Validar o conjunto IdentityServer4 com EF Core `9.0.9`, manter os três nupkgs não EF `10.0.0` válidos e empacotar os dois nupkgs EntityFramework `10.0.1` após registrar a revisão de release.
+8. Após aprovação do usuário para os cinco arquivos e hashes exatos, publicar os cinco pacotes IdentityServer4: três `10.0.0` e dois `10.0.1`.
+9. Executar a CI com cache limpo contra o feed publicado e a auditoria final dos 11 nupkgs, builds, testes, metadados, documentação e árvores resolvidas.
 
-Rollback: interromper a promoção ou voltar os consumidores para as versões anteriores. Pacotes `10.0.0` já publicados são imutáveis e não devem ser sobrescritos ou apagados; qualquer correção posterior deve receber nova versão.
+Rollback: interromper a promoção dos cinco pacotes IdentityServer4 ou voltar seus consumidores para as versões anteriores. Os seis pacotes IdentityModel `10.0.0` já publicados são imutáveis; após a publicação dos demais, qualquer correção deverá receber nova versão.
 
 ## Open Questions
 

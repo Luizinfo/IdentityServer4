@@ -2,6 +2,8 @@
 
 Data: 2026-08-18
 
+> Evidência histórica de validação local dos cinco nupkgs `10.0.0`. Nenhum pacote deste conjunto foi publicado. Após o ajuste das dependências EF Core para `9.0.9`, os nupkgs `ZinfoFramework.IdentityServer4.EntityFramework.Storage` e `ZinfoFramework.IdentityServer4.EntityFramework` `10.0.0` tornaram-se provisórios e não serão promovidos; a primeira publicação exige novos artefatos `10.0.1`, hashes e validação conforme as tasks 8.4–8.8.
+
 ## Ambiente e restore
 
 - SDK efetivo no repositório: .NET SDK `10.0.302`, selecionado pelo `global.json` (`10.0.100` com `latestPatch`).
@@ -58,4 +60,4 @@ O pacote `EntityFramework.Storage` declara `AutoMapper 16.2.0`; o teste em feed/
 
 ## Próximos gates
 
-As tasks 8.4 a 8.6 permanecem pendentes. Nenhum pacote foi publicado nesta validação.
+Os novos gates 8.4 a 8.8 permanecem pendentes. Nenhum pacote foi publicado nesta validação.

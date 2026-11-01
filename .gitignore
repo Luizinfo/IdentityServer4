@@ -215,3 +215,8 @@ tempkey.jwk
 
 #artifacts build output
 .artifacts/
+
+# Local release validation output
+/.nuget-cache-group7/
+/.nuget-cache-group8/
+/artifacts/

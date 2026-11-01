@@ -1,6 +1,6 @@
 # upgrade-dotnet-10-identitymodel-packages
 
-Change coordenador multi-repositório para migrar o IdentityServer4 e os quatro repositórios locais IdentityModel para .NET 10, versionar os 11 pacotes como `10.0.0` e publicá-los no NuGet.org sob PackageIds `ZinfoFramework.*`, sem dependências de pacote Duende.
+Change coordenador multi-repositório para migrar o IdentityServer4 e os quatro repositórios locais IdentityModel para .NET 10 e publicar os pacotes no NuGet.org sob PackageIds `ZinfoFramework.*`, sem dependências de pacote Duende. Os seis pacotes IdentityModel `10.0.0` já foram publicados; os cinco pacotes IdentityServer4 ainda estão locais. Destes, três permanecem em `10.0.0` e os dois pacotes `ZinfoFramework.IdentityServer4.EntityFramework*` estão previstos em `10.0.1` com dependências EF Core `9.0.9`.
 
 Os pacotes são continuações independentes mantidas por Luiz Antonio. O change preserva namespaces, assemblies, licença e créditos históricos, mas usa identidade própria de distribuição, metadados e documentação que apontam para os repositórios atuais em [github.com/Luizinfo](https://github.com/Luizinfo/).
 
