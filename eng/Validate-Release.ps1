@@ -59,9 +59,16 @@ try {
     if ($LocalDbInstance -notmatch '^IdentityPrReadiness[A-Za-z0-9_]*$') {
         throw 'Use a dedicated LocalDB instance whose name starts with IdentityPrReadiness.'
     }
-    & sqllocaldb info $LocalDbInstance *> $null
-    if ($LASTEXITCODE -ne 0) { & sqllocaldb create $LocalDbInstance -s }
-    else { & sqllocaldb start $LocalDbInstance }
+    # Some LocalDB versions return zero when a named-instance lookup fails.
+    # Compare the instance inventory instead of trusting that lookup's exit code.
+    $instances = @(& sqllocaldb info | ForEach-Object { $_.Trim() })
+    if ($LASTEXITCODE -ne 0) { throw 'Unable to list LocalDB instances.' }
+    if ($instances -notcontains $LocalDbInstance) {
+        & sqllocaldb create $LocalDbInstance
+        $instances = @(& sqllocaldb info | ForEach-Object { $_.Trim() })
+        if ($instances -notcontains $LocalDbInstance) { throw 'The dedicated migration test instance was not created.' }
+    }
+    & sqllocaldb start $LocalDbInstance
     if ($LASTEXITCODE -ne 0) { throw 'Unable to start the dedicated migration test instance.' }
 
     Invoke-DotNet tool restore

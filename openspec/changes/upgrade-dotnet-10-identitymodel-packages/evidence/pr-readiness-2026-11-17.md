@@ -55,7 +55,20 @@ Logs, hashes e dependências locais estão em `artifacts/pr-readiness-20261117/`
 
 ## Estado dos PRs e CI
 
-As correções estão nas branches locais `fix/pr-readiness-20261117`. Os quatro PRs IdentityModel têm base main; IdentityServer4 tem base master. A CI remota ainda não foi executada para esta revisão; o envio das branches está pendente de autorização. Não há declaração de aprovação remota ou de prontidão para merge.
+As branches `fix/pr-readiness-20261117` foram enviadas aos cinco repositórios Luizinfo após autorização explícita. Os quatro PRs IdentityModel têm base main; IdentityServer4 tem base master.
+
+A primeira rodada remota aprovou Linux nos cinco repositórios e Windows nos quatro IdentityModel. O Windows do IdentityServer4 identificou uma falha do script em ambiente limpo: algumas versões de SqlLocalDB retornam zero ao consultar uma instância inexistente. A inicialização agora consulta o inventário de instâncias, cria a instância ausente e confirma sua existência antes de iniciar. O script corrigido passou novamente com a instância inédita IdentityPrReadinessFresh20261117 e os três bancos/contextos. Log: `extended-validation-fresh.log`.
+
+Os jobs macOS permanecem aguardando um executor nesta etapa. Um executor Intel macos-26-intel suportado foi tentado no AccessTokenValidation para verificar disponibilidade sem remover a validação macOS. A aprovação remota integral continua pendente.
+
+Resultados oficiais por branch:
+
+- [IdentityServer4](https://github.com/Luizinfo/IdentityServer4/actions?query=branch%3Afix%2Fpr-readiness-20261117)
+- [IdentityModel](https://github.com/Luizinfo/IdentityModel/actions?query=branch%3Afix%2Fpr-readiness-20261117)
+- [AccessTokenValidation](https://github.com/Luizinfo/IdentityModel.AspNetCore.AccessTokenValidation/actions?query=branch%3Afix%2Fpr-readiness-20261117)
+- [OAuth2Introspection](https://github.com/Luizinfo/IdentityModel.AspNetCore.OAuth2Introspection/actions?query=branch%3Afix%2Fpr-readiness-20261117)
+- [OidcClient](https://github.com/Luizinfo/IdentityModel.OidcClient/actions?query=branch%3Afix%2Fpr-readiness-20261117)
+
 
 Os gates históricos de publicação em tasks.md não são autorização para promover estes candidatos. Uma nova versão de segurança precisa de versões novas e validação dos artefatos finais antes de publicação.
 
