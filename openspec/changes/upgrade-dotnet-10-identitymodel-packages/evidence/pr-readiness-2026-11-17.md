@@ -59,7 +59,7 @@ As branches `fix/pr-readiness-20261117` foram enviadas aos cinco repositórios L
 
 A primeira rodada remota aprovou Linux nos cinco repositórios e Windows nos quatro IdentityModel. O Windows do IdentityServer4 identificou uma falha do script em ambiente limpo: algumas versões de SqlLocalDB retornam zero ao consultar uma instância inexistente. A inicialização agora consulta o inventário de instâncias, cria a instância ausente e confirma sua existência antes de iniciar. O script corrigido passou novamente com a instância inédita IdentityPrReadinessFresh20261117 e os três bancos/contextos. Log: `extended-validation-fresh.log`.
 
-Os jobs macOS permanecem aguardando um executor nesta etapa. Um executor Intel macos-26-intel suportado foi tentado no AccessTokenValidation para verificar disponibilidade sem remover a validação macOS. A aprovação remota integral continua pendente.
+A imagem macOS padrão permaneceu aguardando executor. A alternativa suportada macos-26-intel iniciou e aprovou os três jobs do AccessTokenValidation na execução 44106643715. A matriz dos cinco repositórios foi padronizada nessa imagem Intel; os builds e testes macOS permanecem obrigatórios. A arquitetura ARM64 não foi validada nesta rodada. A aprovação remota integral dos demais repositórios continua pendente.
 
 Resultados oficiais por branch:
 

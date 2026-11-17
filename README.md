@@ -44,7 +44,7 @@ Depois do build completo, execute `pwsh ./eng/Validate-Release.ps1` para compila
 
 Os contextos de configuração e grants usam EF Core 9.0.9. O host e as ferramentas do exemplo AspNetIdentity usam EF Core 10 para acompanhar ASP.NET Core Identity 10; essa configuração não altera o mínimo dos pacotes de persistência. O validador cobre os três contextos SQL Server. Os exemplos também fixam PKCS 10.0.13 para eliminar os avisos de negação de serviço conhecidos nas versões transitivas anteriores.
 
-A CI usa o mesmo `global.json` em Windows, Linux e macOS e executa a validação SQL Server no Windows. Builds de PR não assinam nem publicam pacotes. O merge exige conferir os resultados remotos da revisão enviada.
+A CI usa o mesmo `global.json` em Windows, Linux e macOS Intel (macos-26-intel) e executa a validação SQL Server no Windows. Builds de PR não assinam nem publicam pacotes. O merge exige conferir os resultados remotos da revisão enviada.
 
 ## Correções de segurança preparadas para a próxima versão
 

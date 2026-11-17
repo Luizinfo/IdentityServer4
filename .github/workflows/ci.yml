@@ -23,7 +23,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        runs-on: [macOS-latest, ubuntu-latest, windows-latest]
+        runs-on: [macos-26-intel, ubuntu-latest, windows-latest]
     name: ${{ matrix.runs-on }}
     runs-on: ${{ matrix.runs-on }}
     steps:
@@ -36,7 +36,7 @@ jobs:
     - run: dotnet --info
     - run: dotnet tool restore
     
-    - if: contains(matrix.runs-on, 'macOS') || contains(matrix.runs-on, 'ubuntu')
+    - if: runner.os != 'Windows'
       run: ./build.sh
     - if: matrix.runs-on == 'windows-latest'
       run: ./build.ps1
