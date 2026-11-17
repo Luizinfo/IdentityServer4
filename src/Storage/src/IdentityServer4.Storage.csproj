@@ -44,7 +44,6 @@
   <ItemGroup>
     <PackageReference Include="ZinfoFramework.IdentityModel" />
     <PackageReference Include="Newtonsoft.Json" />
-    <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" />
   </ItemGroup>
 
 </Project>

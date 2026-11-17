@@ -49,7 +49,6 @@
   <ItemGroup>
     <PackageReference Include="ZinfoFramework.IdentityServer4" />
     
-    <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" />
   </ItemGroup>
 
 </Project>

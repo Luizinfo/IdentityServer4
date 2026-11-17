@@ -98,3 +98,17 @@ As tasks 5.1 a 5.4 registram a validação concluída para os PackageIds histór
 - [ ] 9.2 Consolidar evidências de build, testes, DPoP, conformidade, migrações EF, exemplos, CI, metadados e documentação por repositório.
 - [ ] 9.3 Confirmar que nenhuma task foi concluída sem a evidência obrigatória de seu gate.
 - [ ] 9.4 Confirmar a titularidade dos 11 pacotes pela conta ou organização de Luiz Antonio no NuGet.org e registrar a solicitação de reserva do prefixo `ZinfoFramework` quando os critérios do NuGet.org forem atendidos.
+
+
+## 10. Prontidão para PR — correções de 17/11/2026
+
+Esta seção registra a revisão atual de código; não altera o histórico dos gates de publicação. Evidência: [prontidão para PR](evidence/pr-readiness-2026-11-17.md).
+
+- [x] 10.1 Corrigir mTLS em todos os endpoints, exigir CA confiável para X509Name e acrescentar testes negativos/positivos.
+- [x] 10.2 Rejeitar caracteres de controle nas URLs de retorno e cobrir a regressão.
+- [x] 10.3 Corrigir build Bullseye, propagação de falhas, SDK/CI e SourceLink vulnerável.
+- [x] 10.4 Executar builds oficiais, 1.819 testes, trimming e compilar todos os exemplos ativos.
+- [x] 10.5 Auditar dependências transitivas, corrigir PKCS dos exemplos e validar os onze pacotes em consumidor isolado.
+- [x] 10.6 Alinhar o host/ferramentas AspNetIdentity e validar os três contextos SQL Server em bancos vazios, sem mudanças pendentes.
+- [x] 10.7 Atualizar README, changelog e evidências e verificar codificação, links e diff.
+- [ ] 10.8 Enviar as branches autorizadas e comprovar a CI remota da revisão antes de declarar prontidão para merge.

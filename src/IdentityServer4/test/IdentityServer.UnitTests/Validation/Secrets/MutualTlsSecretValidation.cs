@@ -64,7 +64,7 @@ namespace IdentityServer.UnitTests.Validation.Secrets
             };
 
             Func<Task> act = async () => await validator.ValidateAsync(client.ClientSecrets, secret);
-            act.Should().Throw<InvalidOperationException>();
+            await Assert.ThrowsAsync<InvalidOperationException>(act);
         }
 
         [Fact]
@@ -151,7 +151,7 @@ namespace IdentityServer.UnitTests.Validation.Secrets
             };
 
             Func<Task> act = async () => await validator.ValidateAsync(client.ClientSecrets, secret);
-            act.Should().Throw<InvalidOperationException>();
+            await Assert.ThrowsAsync<InvalidOperationException>(act);
         }
 
         [Fact]
@@ -177,7 +177,7 @@ namespace IdentityServer.UnitTests.Validation.Secrets
 
         [Fact]
         [Trait("Category", Category)]
-        public async Task Name_valid_secret_should_match()
+        public async Task Name_self_signed_secret_should_not_match()
         {
             ISecretValidator validator = new X509NameSecretValidator(new Logger<X509NameSecretValidator>(new LoggerFactory()));
 
@@ -193,7 +193,7 @@ namespace IdentityServer.UnitTests.Validation.Secrets
 
             var result = await validator.ValidateAsync(client.ClientSecrets, secret);
 
-            result.Success.Should().BeTrue();
+            result.Success.Should().BeFalse();
         }
     }
 }

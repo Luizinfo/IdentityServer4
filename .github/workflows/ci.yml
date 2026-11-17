@@ -1,17 +1,22 @@
-name: 'CI'
+name: CI
 
 on:
+  workflow_dispatch:
   push:
     branches:
     - master
     - main
     - features/**
+    - fix/**
     tags:
     - '*.*.*'
   pull_request:
 
 env:
   DOTNET_NOLOGO: true
+
+permissions:
+  contents: read
 
 jobs:
   build:
@@ -22,18 +27,19 @@ jobs:
     name: ${{ matrix.runs-on }}
     runs-on: ${{ matrix.runs-on }}
     steps:
-    - uses: actions/checkout@af513c7a016048ae468971c52ed77d9562c7c819
-    - uses: actions/setup-dotnet@v5
+    - uses: actions/checkout@v7
       with:
-        dotnet-version: '10.0.x'
+        fetch-depth: 0
+    - uses: actions/setup-dotnet@v6
+      with:
+        global-json-file: global.json
     - run: dotnet --info
     - run: dotnet tool restore
     
     - if: contains(matrix.runs-on, 'macOS') || contains(matrix.runs-on, 'ubuntu')
       run: ./build.sh
-    - if: matrix.runs-on == 'windows-latest' && github.ref != 'refs/heads/main' && !contains(github.ref, 'refs/tags/')
+    - if: matrix.runs-on == 'windows-latest'
       run: ./build.ps1
-    - if: (matrix.runs-on == 'windows-latest') && (github.ref == 'refs/heads/main' || contains(github.ref, 'refs/tags/'))
-      env:
-        SignClientSecret: ${{ secrets.SIGNCLIENT }}
-      run: ./build.ps1 sign
+    - name: Validate examples, dependencies and Windows SQL Server migrations
+      shell: pwsh
+      run: ./eng/Validate-Release.ps1

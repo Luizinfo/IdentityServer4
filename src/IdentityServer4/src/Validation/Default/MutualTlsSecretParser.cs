@@ -7,7 +7,9 @@ using System.Threading.Tasks;
 using IdentityServer4.Configuration;
 using IdentityServer4.Extensions;
 using IdentityServer4.Models;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
 namespace IdentityServer4.Validation
@@ -71,6 +73,23 @@ namespace IdentityServer4.Validation
                     if (clientCertificate is null)
                     {
                         _logger.LogDebug("Client certificate not present");
+                        return null;
+                    }
+
+                    // Certificates can also reach the ordinary protocol endpoints through
+                    // a TLS listener or proxy. The mTLS alias middleware is not sufficient.
+                    var scheme = _options.MutualTls.ClientCertificateAuthenticationScheme;
+                    var schemes = context.RequestServices.GetRequiredService<IAuthenticationSchemeProvider>();
+                    if (await schemes.GetSchemeAsync(scheme) == null)
+                    {
+                        _logger.LogError("The configured client certificate authentication scheme is not registered.");
+                        return null;
+                    }
+
+                    var authentication = await context.AuthenticateAsync(scheme);
+                    if (!authentication.Succeeded)
+                    {
+                        _logger.LogDebug("Client certificate authentication failed.");
                         return null;
                     }
                     

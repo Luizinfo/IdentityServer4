@@ -1,25 +1,14 @@
-$ErrorActionPreference = "Stop";
+$ErrorActionPreference = 'Stop'
+Push-Location $PSScriptRoot
+try {
+    New-Item -ItemType Directory -Force -Path ./nuget | Out-Null
+    dotnet tool restore
+    if ($LASTEXITCODE -ne 0) { throw 'Tool restore failed.' }
 
-New-Item -ItemType Directory -Force -Path ./nuget
-
-dotnet tool restore
-
-pushd ./src/Storage
-Invoke-Expression "./build.ps1 $args"
-popd
-
-pushd ./src/IdentityServer4
-Invoke-Expression "./build.ps1 $args"
-popd
-
-pushd ./src/EntityFramework.Storage
-Invoke-Expression "./build.ps1 $args"
-popd
-
-pushd ./src/EntityFramework
-Invoke-Expression "./build.ps1 $args"
-popd
-
-pushd ./src/AspNetIdentity
-Invoke-Expression "./build.ps1 $args"
-popd
+    foreach ($component in @('Storage', 'IdentityServer4', 'EntityFramework.Storage', 'EntityFramework', 'AspNetIdentity')) {
+        Push-Location (Join-Path $PSScriptRoot "src/$component")
+        try { & ./build.ps1 @args }
+        finally { Pop-Location }
+    }
+}
+finally { Pop-Location }

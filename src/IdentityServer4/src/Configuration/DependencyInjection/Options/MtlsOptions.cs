@@ -2,6 +2,8 @@
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
 
+using System.Security.Cryptography.X509Certificates;
+
 namespace IdentityServer4.Configuration
 {
     /// <summary>
@@ -18,6 +20,13 @@ namespace IdentityServer4.Configuration
         /// Specifies the name of the authentication handler for X.509 client certificates
         /// </summary>
         public string ClientCertificateAuthenticationScheme { get; set; } = "Certificate";
+
+        /// <summary>
+        /// Chain policy for subject-name client secrets. A trusted CA chain is required
+        /// even when the certificate authentication handler permits self-signed certificates.
+        /// Configure CustomRootTrust and CustomTrustStore here when using a private CA.
+        /// </summary>
+        public X509ChainPolicy ClientCertificateChainPolicy { get; } = new X509ChainPolicy();
 
         /// <summary>
         /// Specifies a separate domain to run the MTLS endpoints on.

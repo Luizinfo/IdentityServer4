@@ -146,7 +146,7 @@ namespace IdentityServer4.Extensions
         [DebuggerStepThrough]
         public static bool IsLocalUrl(this string url)
         {
-            if (string.IsNullOrEmpty(url))
+            if (string.IsNullOrEmpty(url) || url.Any(char.IsControl))
             {
                 return false;
             }

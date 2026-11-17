@@ -17,6 +17,7 @@
     <PackageReference Update="Microsoft.AspNetCore.Authentication.Certificate" Version="$(AspNetVersion)"/>
     
     <PackageReference Update="System.IdentityModel.Tokens.Jwt" Version="8.15.0" />
+    <PackageReference Include="System.Security.Cryptography.Pkcs" Version="10.0.13" />
     <PackageReference Update="Newtonsoft.Json" Version="13.0.4" />
     <PackageReference Update="Serilog.AspNetCore" Version="3.2.0" />
     <PackageReference Update="Serilog.Extensions.Logging" Version="10.0.0" />

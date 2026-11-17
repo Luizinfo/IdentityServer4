@@ -43,7 +43,6 @@
     <PackageReference Include="ZinfoFramework.IdentityServer4.Storage" />
     
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" />
-    <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" />
   </ItemGroup>
 
 </Project>

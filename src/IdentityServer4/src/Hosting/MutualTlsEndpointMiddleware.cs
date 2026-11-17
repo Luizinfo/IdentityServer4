@@ -92,6 +92,14 @@ namespace IdentityServer4.Hosting
 
         private async Task<AuthenticateResult> TriggerCertificateAuthentication(HttpContext context)
         {
+            var schemes = context.RequestServices.GetService(typeof(IAuthenticationSchemeProvider)) as IAuthenticationSchemeProvider;
+            if (schemes == null || await schemes.GetSchemeAsync(_options.MutualTls.ClientCertificateAuthenticationScheme) == null)
+            {
+                _logger.LogError("The configured client certificate authentication scheme is not registered.");
+                context.Response.StatusCode = StatusCodes.Status403Forbidden;
+                return AuthenticateResult.Fail("Client certificate authentication is not configured.");
+            }
+
             var x509AuthResult =
                 await context.AuthenticateAsync(_options.MutualTls.ClientCertificateAuthenticationScheme);
 
