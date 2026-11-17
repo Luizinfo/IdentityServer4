@@ -111,4 +111,4 @@ Esta seção registra a revisão atual de código; não altera o histórico dos 
 - [x] 10.5 Auditar dependências transitivas, corrigir PKCS dos exemplos e validar os onze pacotes em consumidor isolado.
 - [x] 10.6 Alinhar o host/ferramentas AspNetIdentity e validar os três contextos SQL Server em bancos vazios, sem mudanças pendentes.
 - [x] 10.7 Atualizar README, changelog e evidências e verificar codificação, links e diff.
-- [ ] 10.8 Enviar as branches autorizadas e comprovar a CI remota da revisão antes de declarar prontidão para merge.
+- [x] 10.8 Enviar as branches autorizadas e comprovar a CI remota da revisão: 15 jobs aprovados, cobrindo Windows, Linux e macOS Intel nos cinco repositórios. Commits e execuções registrados na evidência de prontidão para PR.

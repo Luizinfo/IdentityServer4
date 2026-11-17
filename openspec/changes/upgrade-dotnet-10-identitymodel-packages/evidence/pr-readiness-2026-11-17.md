@@ -59,19 +59,23 @@ As branches `fix/pr-readiness-20261117` foram enviadas aos cinco repositórios L
 
 A primeira rodada remota aprovou Linux nos cinco repositórios e Windows nos quatro IdentityModel. O Windows do IdentityServer4 identificou uma falha do script em ambiente limpo: algumas versões de SqlLocalDB retornam zero ao consultar uma instância inexistente. A inicialização agora consulta o inventário de instâncias, cria a instância ausente e confirma sua existência antes de iniciar. O script corrigido passou novamente com a instância inédita IdentityPrReadinessFresh20261117 e os três bancos/contextos. Log: `extended-validation-fresh.log`.
 
-A imagem macOS padrão permaneceu aguardando executor. A alternativa suportada macos-26-intel iniciou e aprovou os três jobs do AccessTokenValidation na execução 44106643715. A matriz dos cinco repositórios foi padronizada nessa imagem Intel; os builds e testes macOS permanecem obrigatórios. A arquitetura ARM64 não foi validada nesta rodada. A aprovação remota integral dos demais repositórios continua pendente.
+A imagem macOS padrão permaneceu aguardando executor. A matriz dos cinco repositórios foi padronizada na imagem suportada macos-26-intel, que executou os builds e testes obrigatórios. A arquitetura ARM64 não foi validada nesta rodada.
 
-Resultados oficiais por branch:
+As **15 validações remotas foram aprovadas**, cobrindo Windows, Linux e macOS Intel em cada repositório. As revisões de código e execuções completas usadas como evidência são:
 
-- [IdentityServer4](https://github.com/Luizinfo/IdentityServer4/actions?query=branch%3Afix%2Fpr-readiness-20261117)
-- [IdentityModel](https://github.com/Luizinfo/IdentityModel/actions?query=branch%3Afix%2Fpr-readiness-20261117)
-- [AccessTokenValidation](https://github.com/Luizinfo/IdentityModel.AspNetCore.AccessTokenValidation/actions?query=branch%3Afix%2Fpr-readiness-20261117)
-- [OAuth2Introspection](https://github.com/Luizinfo/IdentityModel.AspNetCore.OAuth2Introspection/actions?query=branch%3Afix%2Fpr-readiness-20261117)
-- [OidcClient](https://github.com/Luizinfo/IdentityModel.OidcClient/actions?query=branch%3Afix%2Fpr-readiness-20261117)
+| Repositório | Revisão validada | CI — três plataformas aprovadas |
+| --- | --- | --- |
+| IdentityServer4 | [28f6f0bf66c5](https://github.com/Luizinfo/IdentityServer4/commit/28f6f0bf66c5a190680dfe88613de72c12660040) | [44107926920](https://github.com/Luizinfo/IdentityServer4/actions/runs/44107926920) |
+| IdentityModel | [d3056461ffc8](https://github.com/Luizinfo/IdentityModel/commit/d3056461ffc87163e4be2af1cc51ebd071701b64) | [44107940324](https://github.com/Luizinfo/IdentityModel/actions/runs/44107940324) |
+| AccessTokenValidation | [523e18a3a373](https://github.com/Luizinfo/IdentityModel.AspNetCore.AccessTokenValidation/commit/523e18a3a3737fb6e668f3a118cee5143b0e1344) | [44108073097](https://github.com/Luizinfo/IdentityModel.AspNetCore.AccessTokenValidation/actions/runs/44108073097) |
+| OAuth2Introspection | [30e1f432caab](https://github.com/Luizinfo/IdentityModel.AspNetCore.OAuth2Introspection/commit/30e1f432caab72c39be0d25918a9b5754cfc787f) | [44107954955](https://github.com/Luizinfo/IdentityModel.AspNetCore.OAuth2Introspection/actions/runs/44107954955) |
+| OidcClient | [211aba816a09](https://github.com/Luizinfo/IdentityModel.OidcClient/commit/211aba816a097fc7ab007b0505faa5cde78961c1) | [44107967158](https://github.com/Luizinfo/IdentityModel.OidcClient/actions/runs/44107967158) |
 
+O job Windows do IdentityServer4 confirmou remotamente os três contextos em bancos vazios, ausência de mudanças pendentes e reaplicação sem alterações. O log aprovado foi guardado localmente em `artifacts/pr-readiness-20261117/ci-windows-approved.log`. Os cinco diffs passaram em `git diff --check`, e as bases remotas continuavam iguais às usadas na revisão.
+
+**Resultado: os cinco projetos estão prontos para abrir PR**, com base master para IdentityServer4 e main para os quatro IdentityModel. As correções foram enviadas em `fix/pr-readiness-20261117`. Esta tarefa não abriu nem mesclou PRs.
 
 Os gates históricos de publicação em tasks.md não são autorização para promover estes candidatos. Uma nova versão de segurança precisa de versões novas e validação dos artefatos finais antes de publicação.
-
 
 ## Referências de segurança
 
